@@ -1,4 +1,5 @@
 # FacialRecognition
+# program2.py
 program2.py come prima cosa esegue al suo interno ELANtoCSV.py
 
 ELANtoCSV.py legge i file contenuti nella cartella elan e, servendosi dei dati contenuti in globals.py (cioè del contenuto del dizionario GROUP_IDs), li riebalora e li salva nella cartella csv_from_elan
