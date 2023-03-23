@@ -12,3 +12,7 @@ program3.py chiede due parametri in input: la misura della finestra da analizzar
 Legge i file contenuti nella cartella csv_output e analizza ognuno in finestre, secondo i parametri forniti dall'utente: per ogni colonna vengono svolti dei calcoli (min, max, media, stdev, skew, kurt) che vengono poi inseriti come riga di un DataFrame
 
 Il DataFrame viene poi salvato come file csv in csv_windows_{misura finestra}_{overlap} utilizzando la funzione save_csv() contenuta in program2.py, e infine vengono concatenati e salvati in un unico file csv tutti i DataFrame risultanti con la funzione concat_csv() contenuta in program2.py
+
+
+# NOTA
+Importare le cartelle elan e csv per utilizzare il codice
