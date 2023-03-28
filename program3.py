@@ -77,8 +77,16 @@ def window(path, size, overlap):
             else:
                 bn[i, ind] = col_values.iloc[1]
     result_df = pd.DataFrame(bn, columns=result_df.columns) #scrive sul nuovo DataFrame la riga appena elaborata 
-    form = [f for f in df_col if f.startswith('participant') or f.startswith('behavior') or f.endswith('min') or f.endswith('max')]
-    result_df[form] = result_df[form].applymap('{:.0f}'.format)
+    for f in df_col:
+        if f.startswith('participant') or f.startswith('behavior'):
+            result_df[f] = result_df[f].apply('{:.0f}'.format)
+        elif f.endswith('min') or f.endswith('max'):
+            if f.startswith('AU'):
+                result_df[f] = result_df[f].apply('{:.2f}'.format)
+            else:
+                result_df[f] = result_df[f].apply('{:.0f}'.format)
+        elif (f.endswith('mean') and f.startswith('AU')) or f.endswith('stdev') or f.endswith('skew') or f.endswith('kurt'):
+            result_df[f] = result_df[f].apply('{:.6f}'.format)
     return result_df
 
 
