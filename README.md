@@ -21,4 +21,4 @@ Il DataFrame viene poi salvato come file csv in csv_windows_{misura finestra}_{o
 
 
 # NOTA
-Importare le cartelle elan e csv per utilizzare il codice
+Importare le cartelle elan, csv e json_zip per utilizzare il codice
