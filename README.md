@@ -4,7 +4,13 @@ program2.py come prima cosa esegue al suo interno ELANtoCSV.py
 
 ELANtoCSV.py legge i file contenuti nella cartella elan e, servendosi dei dati contenuti in globals.py (cioè del contenuto del dizionario GROUP_IDs), li riebalora e li salva nella cartella csv_from_elan
 
-In program2.py viene poi fatta l'intersezione di alcuni dati contenuti nelle cartelle csv_from_elan e csv (eliminando/aggiungendo colonne), i DataFrame risultanti vengono poi salvati in csv_output come file csv, inoltre vengono concatenati e salvati in un unico file csv: ciò avviene utilizzando le funzioni save_csv() e concat_csv() definite all'interno dello stesso script
+In program2.py viene poi fatta l'intersezione di alcuni dati contenuti nelle cartelle csv_from_elan e csv.
+Per ogni file in csv_from_elan: 
+Viene letto il file csv come DataFrame (vengono lette solo le colonne di interesse), questo viene poi salvato come lista.
+Vengono creati due numpy array, in uno vengono inseriti i dati contenuti nel file corrispondente nella cartella csv, nell'altro vengono inseriti i dati contenuti in ogni file JSON (ogni JSON è un riga).
+Infine vengono unite le tre liste/array e vengono convertite in DataFrame.
+
+I DataFrame risultanti vengono poi salvati in csv_output come file csv, inoltre vengono concatenati e salvati in un unico file csv: ciò avviene utilizzando le funzioni save_csv() e concat_csv() definite all'interno dello stesso script
 
 # program3.py
 program3.py chiede due parametri in input: la misura della finestra da analizzare e le righe di overlap (il numero deve essere compreso tra 0 e misura della finestra - 1)
