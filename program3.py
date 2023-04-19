@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
-from program2 import save_csv, concat_csv
+from program2 import save_csv, concat_csv, pose_keypoints, hand_keypoints
 
 def calc_min(col_values):
     return col_values.min()
@@ -76,16 +76,18 @@ def window(path, size, overlap):
                     n += 1
             else:
                 bn[i, ind] = col_values.iloc[1]
-    result_df = pd.DataFrame(bn, columns=result_df.columns) #scrive sul nuovo DataFrame la riga appena elaborata 
+    result_df = pd.DataFrame(bn, columns=result_df.columns) #scrive sul nuovo DataFrame i calcoli appena elaborati
     for f in df_col:
         if f.startswith('participant') or f.startswith('behavior'):
             result_df[f] = result_df[f].apply('{:.0f}'.format)
+        elif any(f.startswith(col) for col in pose_keypoints) or any(f.startswith(col) for col in hand_keypoints):
+            result_df[f] = result_df[f].apply('{:.6f}'.format)
         elif f.endswith('min') or f.endswith('max'):
             if f.startswith('AU'):
                 result_df[f] = result_df[f].apply('{:.2f}'.format)
             else:
                 result_df[f] = result_df[f].apply('{:.0f}'.format)
-        elif (f.endswith('mean') and f.startswith('AU')) or f.endswith('stdev') or f.endswith('skew') or f.endswith('kurt'):
+        elif (f.endswith('mean') and f.startswith('AU')) or () or f.endswith('stdev') or f.endswith('skew') or f.endswith('kurt'):
             result_df[f] = result_df[f].apply('{:.6f}'.format)
     return result_df
 
