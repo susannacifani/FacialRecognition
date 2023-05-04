@@ -4,35 +4,32 @@ import os
 import json
 from pathlib import Path
 import numpy as np
+import math
 
-
+diagonal = 735
 in_col = ["participant_id", "behavior_1", "behavior_2", "behavior_3", "behavior_4"]
 fin_col = ['participant_id', 'behavior']
 pose = ['gaze_angle_x', 'gaze_angle_y', 'pose_Rx', 'pose_Ry', 'pose_Rz', 'p_rx', 'p_ry', 'p_rz']
 au = ['AU01_r', 'AU02_r', 'AU04_r', 'AU05_r', 'AU06_r', 'AU07_r', 'AU09_r', 'AU10_r', 'AU12_r', 'AU14_r', 'AU15_r', 'AU17_r', 'AU20_r', 'AU23_r', 'AU25_r', 'AU26_r', 'AU45_r']
-pose_keypoints = ['Nose_x', 'Nose_y', 'Neck_x', 'Neck_y', 'RShoulder_x', 'RShoulder_y', 
-                  'RElbow_x', 'RElbow_y', 'RWrist_x', 'RWrist_y', 'LShoulder_x', 'LShoulder_y', 
-                  'LElbow_x', 'LElbow_y', 'LWrist_x', 'LWrist_y', 'MidHip_x', 'MidHip_y', 
-                  'RHip_x', 'RHip_y', 'RKnee_x', 'RKnee_y', 'RAnkle_x', 'RAnkle_y', 
-                  'LHip_x', 'LHip_y', 'LKnee_x', 'LKnee_y', 'LAnkle_x', 'LAnkle_y', 
-                  'REye_x', 'REye_y', 'LEye_x', 'LEye_y', 'REar_x', 'REar_y', 'LEar_x', 'LEar_y', 
-                  'LBigToe_x', 'LBigToe_y', 'LSmallToe_x', 'LSmallToe_y', 'LHeel_x', 'LHeel_y', 
-                  'RBigToe_x', 'RBigToe_y', 'RSmallToe_x', 'RSmallToe_y', 'RHeel_x', 'RHeel_y']
-hand_keypoints = ['Wrist_Lx', 'Wrist_Ly', 'Thumb1_Lx', 'Thumb1_Ly', 'Thumb2_Lx', 'Thumb2_Ly', 
-                  'Thumb3_Lx', 'Thumb3_Ly', 'Thumb4_Lx', 'Thumb4_Ly', 'Index1_Lx', 'Index1_Ly', 
-                  'Index2_Lx', 'Index2_Ly', 'Index3_Lx', 'Index3_Ly', 'Index4_Lx', 'Index4_Ly', 
-                  'Middle1_Lx', 'Middle1_Ly', 'Middle2_Lx', 'Middle2_Ly', 'Middle3_Lx', 
-                  'Middle3_Ly', 'Middle4_Lx', 'Middle4_Ly', 'Ring1_Lx', 'Ring1_Ly', 'Ring2_Lx', 
-                  'Ring2_Ly', 'Ring3_Lx', 'Ring3_Ly', 'Ring4_Lx', 'Ring4_Ly', 'Pinky1_Lx', 
-                  'Pinky1_Ly', 'Pinky2_Lx', 'Pinky2_Ly', 'Pinky3_Lx', 'Pinky3_Ly', 'Pinky4_Lx', 
-                  'Pinky4_Ly', 'Wrist_Rx', 'Wrist_Ry', 'Thumb1_Rx', 'Thumb1_Ry', 'Thumb2_Rx', 
-                  'Thumb2_Ry', 'Thumb3_Rx', 'Thumb3_Ry', 'Thumb4_Rx', 'Thumb4_Ry', 'Index1_Rx', 
-                  'Index1_Ry', 'Index2_Rx', 'Index2_Ry', 'Index3_Rx', 'Index3_Ry', 'Index4_Rx', 
-                  'Index4_Ry', 'Middle1_Rx', 'Middle1_Ry', 'Middle2_Rx', 'Middle2_Ry', 
-                  'Middle3_Rx', 'Middle3_Ry', 'Middle4_Rx', 'Middle4_Ry', 'Ring1_Rx', 'Ring1_Ry', 
-                  'Ring2_Rx', 'Ring2_Ry', 'Ring3_Rx', 'Ring3_Ry', 'Ring4_Rx', 'Ring4_Ry', 
-                  'Pinky1_Rx', 'Pinky1_Ry', 'Pinky2_Rx', 'Pinky2_Ry', 'Pinky3_Rx', 'Pinky3_Ry', 
-                  'Pinky4_Rx', 'Pinky4_Ry']
+
+pose_keypoints = ['Neck', 'RShoulder', 'RElbow', 'RWrist', 
+                  'LShoulder', 'LElbow', 'LWrist', 
+                  'MidHip', 'RHip', 'RKnee', 'RAnkle', 
+                  'LHip', 'LKnee', 'LAnkle', 
+                  'REye', 'LEye', 'REar', 'LEar',
+                  'LBigToe', 'LSmallToe', 'LHeel', 
+                  'RBigToe', 'RSmallToe', 'RHeel']
+
+hand_keypoints = ['Wrist_L', 'Thumb1_L', 'Thumb2_L', 'Thumb3_L', 'Thumb4_L', 
+                  'Index1_L', 'Index2_L', 'Index3_L', 'Index4_L',
+                  'Middle1_L', 'Middle2_L', 'Middle3_L', 'Middle4_L', 
+                  'Ring1_L', 'Ring2_L', 'Ring3_L', 'Ring4_L', 
+                  'Pinky1_L', 'Pinky2_L', 'Pinky3_L', 'Pinky4_L', 
+                  'Wrist_R', 'Thumb1_R', 'Thumb2_R', 'Thumb3_R', 'Thumb4_R', 
+                  'Index1_R', 'Index2_R', 'Index3_R', 'Index4_R', 
+                  'Middle1_R', 'Middle2_R', 'Middle3_R', 'Middle4_R',
+                  'Ring1_R', 'Ring2_R', 'Ring3_R', 'Ring4_R',
+                  'Pinky1_R', 'Pinky2_R', 'Pinky3_R', 'Pinky4_R']
 
 def save_csv(folder, filename, df):
     """
@@ -114,6 +111,7 @@ def csv_intersec():
         temp = []
         temprh = []
         templh = []
+        nose = []
         num = '0' + number if len(number) == 1 else number
         for entry in Path(folder3).glob(f'**/*{num}'):
             if not entry.is_dir():
@@ -129,15 +127,33 @@ def csv_intersec():
                     el_p = people[0]['pose_keypoints_2d']
                     el_lh = people[0]['hand_left_keypoints_2d']
                     el_rh = people[0]['hand_right_keypoints_2d']
-                    temp = [el_p[i:i+2] for i in range(0, len(el_p), 3)]
+                    nose = el_p[0:2]
+                    temp = [el_p[i:i+2] for i in range(3, len(el_p), 3)]
                     temprh = [el_rh[i:i+2] for i in range(0, len(el_rh), 3)]
                     templh = [el_lh[i:i+2] for i in range(0, len(el_lh), 3)]
-                    final = temp + temprh + templh
+                    hands = temprh + templh
+                    
+                    dist = []
+                    if nose[0] != 0 and nose[1] != 0:
+                        for l in temp:
+                            #if l[0] or l[1] < 1: le metto a 0 senza dist euclidea
+                                #elif l[0] and l[1] != 0: distanza euclidea
+                            if l[0] < 1 or l[1] < 1:
+                                dist.append(0)
+                            else:
+                                #il naso ha coordinate (xn, yn) e un punto sulla faccia (xp, yp)
+                                #d((xn,yn), (xp,yp)) = sqrt((xp - xn)^2 + (yp - yn)^2)
+                                dist.append(math.sqrt((l[0] - nose[0])**2 + (l[1] - nose[1])**2))
+                        for l in hands:
+                            if l[0] < 1 or l[1] < 1:
+                                dist.append(diagonal)
+                            else:
+                                dist.append(math.sqrt((l[0] - nose[0])**2 + (l[1] - nose[1])**2))
+                    else:
+                        dist.append(0)
                     #bn2
-                    col = 0
-                    for row in range(frame, frame+len(final)):
-                        bn2[frame, col:col+len(final[row-frame])] = final[row-frame]
-                        col += len(final[row-frame]) 
+                    bn2[frame] = dist
+
     
         if new_filename in dataframes:
             df1 = dataframes[new_filename] #prende il DataFrame corrispondente nel dizionario utilizzando il nome del file
