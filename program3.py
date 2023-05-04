@@ -49,7 +49,7 @@ def window(path, size, overlap):
     stats = [s.split("_")[1] for s in list(map(lambda x: x.__name__, STATS))]
     df_col = []
     for c in df.columns:
-        if df.columns.get_loc(c) < 5:
+        if df.columns.get_loc(c) < 2:
             df_col.append(c)
         else:
             for x in stats:
@@ -63,14 +63,17 @@ def window(path, size, overlap):
         start = i * (size - overlap)
         end = start + size
         window_df = df.iloc[start:end]
-        n = 5
+        n = 2
         for ind, (col_name, col_values) in enumerate(window_df.iteritems()): #itera sulle colonne del dataframe
-            if 0 < ind < 5:                
-                if col_values.sum() > size / 2:
-                    bn[i, ind] = '1'
-                else:
-                    bn[i, ind] = '0'
-            elif ind > 4:
+            if 0 < ind < 2:   
+                value_counts = col_values.value_counts()
+                most_common_value = value_counts.idxmax()
+                bn[i, ind] = most_common_value
+                # if col_values.sum() > size / 2:
+                #     bn[i, ind] = '1'
+                # else:
+                #     bn[i, ind] = '0'
+            elif ind > 1:
                 for stat_func in STATS:
                     bn[i, n] = stat_func(col_values)
                     n += 1
