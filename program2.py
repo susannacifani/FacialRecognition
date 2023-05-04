@@ -7,6 +7,7 @@ import numpy as np
 
 
 in_col = ["participant_id", "behavior_1", "behavior_2", "behavior_3", "behavior_4"]
+fin_col = ['participant_id', 'behavior']
 pose = ['gaze_angle_x', 'gaze_angle_y', 'pose_Rx', 'pose_Ry', 'pose_Rz', 'p_rx', 'p_ry', 'p_rz']
 au = ['AU01_r', 'AU02_r', 'AU04_r', 'AU05_r', 'AU06_r', 'AU07_r', 'AU09_r', 'AU10_r', 'AU12_r', 'AU14_r', 'AU15_r', 'AU17_r', 'AU20_r', 'AU23_r', 'AU25_r', 'AU26_r', 'AU45_r']
 pose_keypoints = ['Nose_x', 'Nose_y', 'Neck_x', 'Neck_y', 'RShoulder_x', 'RShoulder_y', 
@@ -89,7 +90,7 @@ def csv_intersec():
     folder2 = "csv"
     folder3 = "json"
     dataframes = {}
-    #lista_dataframe = []
+    lista_dataframe = []
     
     files1 = [f for f in os.listdir(folder1) if f.endswith('.csv')] #elenco dei file CSV nella cartella csv_from_elan
     for file in files1:
@@ -105,8 +106,8 @@ def csv_intersec():
         keepCol = pose + au
         df2 = pd.read_csv(file_path2, usecols=keepCol) #carica ciascun file CSV in un DataFrame
         list_df2 = df2.values.tolist() #trasforma il DataFrame in una lista di liste
-        df_col = in_col + pose + au + pose_keypoints + hand_keypoints
-        bn1 = np.zeros((len(df2), len(in_col)))
+        df_col = fin_col + pose + au + pose_keypoints + hand_keypoints
+        bn1 = np.zeros((len(df2), len(in_col)+1))
         bn1[:, 0] = number
         bn2 = np.zeros((len(df2), (len(pose_keypoints) + len(hand_keypoints))))
         
@@ -144,24 +145,40 @@ def csv_intersec():
                 start = row['inizio'] - 1
                 stop = row['fine'] - 1
                 action = row['classe']
-                bn1[start:stop, action] = 1   
-
-            concat_list = np.concatenate((bn1, list_df2), axis=1).tolist() #concatena i numpy array e la lista di liste
+                #popolo sempre le 4 colonne di behavior con 1 
+                bn1[start:stop, action] = 1
+                #non serve gestire la sovrapposizione in alcun modo perchè comunque
+                #eliminiamo ogni riga che ha più di un 1
+                bn1[start:stop, 5] = action
+                
+            #elimino le righe con comportamenti sovrapposti o senza comportamenti
+            index_to_delete = []
+            for index, row in enumerate(bn1[:, 1:5]):
+                if sum(row) > 1 or sum(row) == 0:
+                    index_to_delete.append(index)
+            index_to_delete.reverse() #faccio il reverse degli indici per cancellare dalla fine
+                
+            bn3 = np.dstack((bn1[:, 0], bn1[:, -1]))
+            bn4 = bn3[0]
+            concat_list = np.concatenate((bn4, list_df2), axis=1).tolist() #concatena i numpy array e la lista di liste
             concat_list2 = np.concatenate((concat_list, bn2), axis=1).tolist()
+            
+            for x in index_to_delete:
+                del concat_list2[x]
             
             new_df = pd.DataFrame(concat_list2, columns=(tuple(df_col)))
 
-            new_df[in_col] = new_df[in_col].astype(int)
+            new_df[fin_col] = new_df[fin_col].astype(int)
             new_df[pose] = new_df[pose].apply(lambda x: x * 1000).applymap('{:.0f}'.format)
-            new_df[au] = new_df[au].applymap('{:.2f}'.format)
+            new_df[au] = new_df[au].applymap('{:.2f}'.format)                    
                 
-            #lista_dataframe.append(new_df) #aggiunge il Dataframe corrente alla lista dei Dataframe
+            lista_dataframe.append(new_df) #aggiunge il Dataframe corrente alla lista dei Dataframe
             
             output_folder = "csv_output"
             save_csv(output_folder, new_filename, new_df) #salva il DataFrame come csv
 
-    # name = 'final.csv'
-    # concat_csv(output_folder, name, lista_dataframe) #concatena tutti i DataFrame e li salva come csv
+    name = 'final.csv'
+    concat_csv(output_folder, name, lista_dataframe) #concatena tutti i DataFrame e li salva come csv
     
     print("Programma terminato correttamente")
     
