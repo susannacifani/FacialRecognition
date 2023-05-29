@@ -1,17 +1,8 @@
 import os
 import pandas as pd
-import time
 import numpy as np
-from sklearn.feature_selection import VarianceThreshold
-from sklearn.model_selection import KFold
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold
-from sklearn import datasets
-from sklearn import metrics
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import classification_report
-from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
 import pickle
 from sklearn.metrics import confusion_matrix
