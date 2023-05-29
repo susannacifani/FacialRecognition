@@ -1,15 +1,7 @@
 import os
 import pandas as pd
-import time
 import numpy as np
-from sklearn.feature_selection import VarianceThreshold
-from sklearn.model_selection import KFold
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold
-from sklearn import datasets
-from sklearn import metrics
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import classification_report
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
@@ -27,7 +19,8 @@ def precision1(label5, confusion_matrix3):
 
 
 def reports_to_txt(file_name, toScale=False, resampled=False, resampleTechnique=0):
-    output_path = r"C:\Users\susan\Documents\Python\ricfacciale\output_files\log.txt"
+    output_dir = r"C:\Users\susan\Documents\Python\ricfacciale\output_files"
+    output_path = os.path.join(output_dir, file_name + ".txt")
     output_file = open(output_path, "w")
 
 
@@ -313,7 +306,7 @@ def reports_to_txt(file_name, toScale=False, resampled=False, resampleTechnique=
         # print(report)
         # print()
 
-reports_to_txt("25fps", toScale=True, resampled=False)
+reports_to_txt("25fps_svm", toScale=True, resampled=False)
 
 
 
