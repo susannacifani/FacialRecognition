@@ -44,8 +44,8 @@ def reports_to_txt(file_name, toScale=False, resampled=False, resampleTechnique=
     tabellone = {}
     
     #divide il dataframe in input X e target y
-    X = df.iloc[:1000, 2:]
-    y = df.iloc[:1000, 1]
+    X = df.iloc[:, 2:]
+    y = df.iloc[:, 1]
     
     
     kf = StratifiedKFold(5, shuffle=True)
