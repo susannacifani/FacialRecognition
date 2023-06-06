@@ -1,0 +1,183 @@
+
+Best parameters set found on development set:
+
+{'n_neighbors': 9}
+
+Grid scores on development set:
+
+0.667 (+/-0.029) for {'n_neighbors': 1}
+0.656 (+/-0.033) for {'n_neighbors': 2}
+0.688 (+/-0.021) for {'n_neighbors': 3}
+0.691 (+/-0.030) for {'n_neighbors': 4}
+0.693 (+/-0.010) for {'n_neighbors': 5}
+0.699 (+/-0.018) for {'n_neighbors': 6}
+0.699 (+/-0.022) for {'n_neighbors': 7}
+0.700 (+/-0.019) for {'n_neighbors': 8}
+0.701 (+/-0.027) for {'n_neighbors': 9}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+{'1': {'precision': 0.6977186311787072, 'recall': 0.7742616033755274, 'f1-score': 0.7340000000000001, 'support': 474}, '2': {'precision': 0.6136363636363636, 'recall': 0.421875, 'f1-score': 0.5, 'support': 128}, '3': {'precision': 0.7326892109500805, 'recall': 0.7996485061511424, 'f1-score': 0.7647058823529411, 'support': 569}, '4': {'precision': 0.9090909090909091, 'recall': 0.37037037037037035, 'f1-score': 0.5263157894736842, 'support': 108}, 'accuracy': 0.7161845191555903, 'macro avg': {'precision': 0.7382837787140152, 'recall': 0.59153886997426, 'f1-score': 0.6312554179566563, 'support': 1279}, 'weighted avg': {'precision': 0.7227099804038903, 'recall': 0.7161845191555903, 'f1-score': 0.7067050448178119, 'support': 1279}}
+
+
+[[367   8  98   1]
+ [ 28  54  44   2]
+ [ 89  24 455   1]
+ [ 42   2  24  40]]
+accuracy:  0.7161845191555903
+
+Best parameters set found on development set:
+
+{'n_neighbors': 6}
+
+Grid scores on development set:
+
+0.676 (+/-0.006) for {'n_neighbors': 1}
+0.659 (+/-0.023) for {'n_neighbors': 2}
+0.686 (+/-0.022) for {'n_neighbors': 3}
+0.688 (+/-0.013) for {'n_neighbors': 4}
+0.691 (+/-0.023) for {'n_neighbors': 5}
+0.701 (+/-0.013) for {'n_neighbors': 6}
+0.698 (+/-0.017) for {'n_neighbors': 7}
+0.700 (+/-0.014) for {'n_neighbors': 8}
+0.700 (+/-0.024) for {'n_neighbors': 9}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+{'1': {'precision': 0.6809701492537313, 'recall': 0.770042194092827, 'f1-score': 0.7227722772277229, 'support': 474}, '2': {'precision': 0.5957446808510638, 'recall': 0.4375, 'f1-score': 0.5045045045045045, 'support': 128}, '3': {'precision': 0.75, 'recall': 0.8014059753954306, 'f1-score': 0.7748513169073916, 'support': 569}, '4': {'precision': 0.7804878048780488, 'recall': 0.2962962962962963, 'f1-score': 0.42953020134228187, 'support': 108}, 'accuracy': 0.7107114933541829, 'macro avg': {'precision': 0.7018006587457111, 'recall': 0.5763111164461384, 'f1-score': 0.6079145749954752, 'support': 1279}, 'weighted avg': {'precision': 0.7115542242549132, 'recall': 0.7107114933541829, 'f1-score': 0.6993356505455742, 'support': 1279}}
+
+
+[[365  14  91   4]
+ [ 37  56  33   2]
+ [ 91  19 456   3]
+ [ 43   5  28  32]]
+accuracy:  0.7107114933541829
+
+Best parameters set found on development set:
+
+{'n_neighbors': 7}
+
+Grid scores on development set:
+
+0.665 (+/-0.009) for {'n_neighbors': 1}
+0.650 (+/-0.026) for {'n_neighbors': 2}
+0.688 (+/-0.013) for {'n_neighbors': 3}
+0.685 (+/-0.012) for {'n_neighbors': 4}
+0.692 (+/-0.016) for {'n_neighbors': 5}
+0.699 (+/-0.012) for {'n_neighbors': 6}
+0.703 (+/-0.019) for {'n_neighbors': 7}
+0.700 (+/-0.011) for {'n_neighbors': 8}
+0.700 (+/-0.015) for {'n_neighbors': 9}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+{'1': {'precision': 0.7054263565891473, 'recall': 0.7679324894514767, 'f1-score': 0.7353535353535353, 'support': 474}, '2': {'precision': 0.6538461538461539, 'recall': 0.4015748031496063, 'f1-score': 0.4975609756097561, 'support': 127}, '3': {'precision': 0.7239747634069401, 'recall': 0.8052631578947368, 'f1-score': 0.7624584717607973, 'support': 570}, '4': {'precision': 0.7647058823529411, 'recall': 0.3611111111111111, 'f1-score': 0.490566037735849, 'support': 108}, 'accuracy': 0.7138389366692729, 'macro avg': {'precision': 0.7119882890487956, 'recall': 0.5839703904017327, 'f1-score': 0.6214847551149844, 'support': 1279}, 'weighted avg': {'precision': 0.7135765480827138, 'recall': 0.7138389366692729, 'f1-score': 0.7031511185607044, 'support': 1279}}
+
+
+[[364   7  96   7]
+ [ 19  51  57   0]
+ [ 91  15 459   5]
+ [ 42   5  22  39]]
+accuracy:  0.7138389366692729
+
+Best parameters set found on development set:
+
+{'n_neighbors': 8}
+
+Grid scores on development set:
+
+0.672 (+/-0.016) for {'n_neighbors': 1}
+0.658 (+/-0.031) for {'n_neighbors': 2}
+0.690 (+/-0.024) for {'n_neighbors': 3}
+0.699 (+/-0.033) for {'n_neighbors': 4}
+0.694 (+/-0.035) for {'n_neighbors': 5}
+0.697 (+/-0.047) for {'n_neighbors': 6}
+0.700 (+/-0.042) for {'n_neighbors': 7}
+0.701 (+/-0.038) for {'n_neighbors': 8}
+0.701 (+/-0.038) for {'n_neighbors': 9}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+{'1': {'precision': 0.673992673992674, 'recall': 0.7780126849894292, 'f1-score': 0.7222767419038273, 'support': 473}, '2': {'precision': 0.6419753086419753, 'recall': 0.4094488188976378, 'f1-score': 0.5, 'support': 127}, '3': {'precision': 0.7334437086092715, 'recall': 0.7771929824561403, 'f1-score': 0.7546848381601363, 'support': 570}, '4': {'precision': 0.7291666666666666, 'recall': 0.3211009174311927, 'f1-score': 0.44585987261146504, 'support': 109}, 'accuracy': 0.7021110242376857, 'macro avg': {'precision': 0.6946445894776468, 'recall': 0.5714388509436, 'f1-score': 0.6057053631688571, 'support': 1279}, 'weighted avg': {'precision': 0.7020105391477851, 'recall': 0.7021110242376857, 'f1-score': 0.6910914642583563, 'support': 1279}}
+
+
+[[368   4  96   5]
+ [ 34  52  39   2]
+ [102  19 443   6]
+ [ 42   6  26  35]]
+accuracy:  0.7021110242376857
+
+Best parameters set found on development set:
+
+{'n_neighbors': 8}
+
+Grid scores on development set:
+
+0.680 (+/-0.016) for {'n_neighbors': 1}
+0.668 (+/-0.014) for {'n_neighbors': 2}
+0.695 (+/-0.025) for {'n_neighbors': 3}
+0.692 (+/-0.019) for {'n_neighbors': 4}
+0.698 (+/-0.022) for {'n_neighbors': 5}
+0.697 (+/-0.017) for {'n_neighbors': 6}
+0.699 (+/-0.015) for {'n_neighbors': 7}
+0.701 (+/-0.017) for {'n_neighbors': 8}
+0.700 (+/-0.030) for {'n_neighbors': 9}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+{'1': {'precision': 0.6704545454545454, 'recall': 0.7484143763213531, 'f1-score': 0.7072927072927072, 'support': 473}, '2': {'precision': 0.6951219512195121, 'recall': 0.4453125, 'f1-score': 0.5428571428571428, 'support': 128}, '3': {'precision': 0.7202572347266881, 'recall': 0.7873462214411248, 'f1-score': 0.7523089840470193, 'support': 569}, '4': {'precision': 0.717391304347826, 'recall': 0.3055555555555556, 'f1-score': 0.4285714285714286, 'support': 108}, 'accuracy': 0.6979655712050078, 'macro avg': {'precision': 0.700806258937143, 'recall': 0.5716571633295084, 'f1-score': 0.6077575656920744, 'support': 1278}, 'weighted avg': {'precision': 0.6990651308178, 'recall': 0.6979655712050078, 'f1-score': 0.687311964822874, 'support': 1278}}
+
+
+[[354   7 106   6]
+ [ 25  57  43   3]
+ [102  15 448   4]
+ [ 47   3  25  33]]
+accuracy:  0.6979655712050078
+[[1818, 40, 487, 23], [143, 270, 216, 9], [475, 92, 2261, 19], [216, 21, 125, 179]]
+Cofusion matrix
+[[1818   40  487   23]
+ [ 143  270  216    9]
+ [ 475   92 2261   19]
+ [ 216   21  125  179]]
+Accuracy
+0.708163903659681
+label precision recall
+0.7677364864864865
+0.4231974921630094
+0.794169301018616
+0.33086876155268025
+0.6855203619909502
+0.6382978723404256
+0.7319520880543865
+0.7782608695652173
+
+f1
+0.7243027888446214
+0.5089538171536288
+0.7617924528301886
+0.4643320363164722
+
+macro Fscore
+0.6148452737862278
+macro Precision
+0.708507797987745
+macro Recall
+0.578993010305198
+
+weighted Fscore
+0.6975114613986295

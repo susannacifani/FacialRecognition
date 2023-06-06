@@ -18,16 +18,15 @@ def precision1(label5, confusion_matrix3):
     return confusion_matrix3[label5, label5] / col.sum()
 
 
-def reports_to_txt(file_name, toScale=False, resampled=False, resampleTechnique=0):
-    output_dir = r"C:\Users\susan\Documents\Python\ricfacciale\output_files"
+def reports_to_txt(folder, file, file_name, toScale=False, resampled=False, resampleTechnique=0):
+    output_dir = r"C:\Users\susan\Documents\Python\ricfacciale\output_files_50"
     output_path = os.path.join(output_dir, file_name + ".txt")
     output_file = open(output_path, "w")
 
 
-    folder = "output_files"
-    file = "file_normalizzato.csv"
-    #folder = "csv_windows_25_0"
-    #file = "output.csv"
+    # folder = "output_files"
+    # file = "file_normalizzato.csv"
+
     file_path = os.path.join(folder, file)
     df = pd.read_csv(file_path)
     
@@ -257,57 +256,10 @@ def reports_to_txt(file_name, toScale=False, resampled=False, resampleTechnique=
     output_file.close()  
         
     
-        # # definisce un set di valori di iperparametri da testare per il modello di 
-        # # Random Forest mediante la tecnica di ricerca casuale ("Randomized Search")
-        # n_estimators = [int(x) for x in np.linspace(start = 200, stop = 2000, num = 10)]
-        # max_features = ['auto', 'sqrt']
-        # max_depth = [int(x) for x in np.linspace(10, 110, num = 11)]
-        # max_depth.append(None)
-        # min_samples_split = [2, 5, 10]
-        # min_samples_leaf = [1, 2, 4]
-        # bootstrap = [True, False]
-        
-        # random_grid = {'n_estimators': n_estimators,
-        #                'max_features': max_features,
-        #                'max_depth': max_depth,
-        #                'min_samples_split': min_samples_split,
-        #                'min_samples_leaf': min_samples_leaf,
-        #                'bootstrap': bootstrap}
-        
-        
-        # rf_random = RandomizedSearchCV(estimator=rf, 
-        #                                param_distributions=random_grid, 
-        #                                n_iter=100, cv=3, 
-        #                                verbose=1, random_state=42, n_jobs=-1)
-        # rf_random.fit(X_train, y_train)
-        # y_true, y_pred = y_test, rf_random.predict(X_test)
-    
-    
-    
-        # print("Best parameters set found on development set:")
-        # print()
-        # print(rf_random.best_params_)
-        # print()
-        # print("Grid scores on development set:")
-        # print()
-        # means = rf_random.cv_results_["mean_test_score"]
-        # stds = rf_random.cv_results_["std_test_score"]
-        # for mean, std, params in zip(means, stds, rf_random.cv_results_["params"]):
-        #     print("%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params))
-        # print()
-    
-        # print("Detailed classification report:")
-        # print()
-        # print("The model is trained on the full development set.")
-        # print("The scores are computed on the full evaluation set.")
-        # print()
-    
-        # report = classification_report(y_true, y_pred, output_dict=True)
-        # print(report)
-        # print()
 
-reports_to_txt("25fps_svm", toScale=True, resampled=False)
-
-
+if __name__ == '__main__':
+    #reports_to_txt("output_files_25", "file_normalizzato.csv", "25fps_svm", toScale=True, resampled=False)
+    reports_to_txt("output_files_50", "file_normalizzato.csv", "50fps_svm", toScale=True, resampled=False)
+    
 
 

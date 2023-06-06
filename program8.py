@@ -18,16 +18,15 @@ def precision1(label5, confusion_matrix3):
     return confusion_matrix3[label5, label5] / col.sum()
 
 
-def reports_to_txt(file_name, toScale=False, resampled=False, resampleTechnique=0):
-    output_dir = r"C:\Users\susan\Documents\Python\ricfacciale\output_files"
+def reports_to_txt(folder, file, file_name, toScale=False, resampled=False, resampleTechnique=0):
+    output_dir = r"C:\Users\susan\Documents\Python\ricfacciale\output_files_50"
     output_path = os.path.join(output_dir, file_name + ".txt")
     output_file = open(output_path, "w")
 
 
-    folder = "output_files"
-    file = "file_normalizzato.csv"
-    #folder = "csv_windows_25_0"
-    #file = "output.csv"
+    # folder = "output_files"
+    # file = "file_normalizzato.csv"
+
     file_path = os.path.join(folder, file)
     df = pd.read_csv(file_path)
     
@@ -255,8 +254,10 @@ def reports_to_txt(file_name, toScale=False, resampled=False, resampleTechnique=
     output_file.close()  
         
 
-reports_to_txt("25fps_knn", toScale=True, resampled=False)
-
+if __name__ == '__main__':
+    #reports_to_txt("output_files_25", "file_normalizzato.csv", "25fps_knn", toScale=True, resampled=False)
+    reports_to_txt("output_files_50", "file_normalizzato.csv", "50fps_knn", toScale=True, resampled=False)
+    
 
 
 
